@@ -1,0 +1,13 @@
+# Ignore the instructions file as requested
+start.txt
+
+# Python temporary files
+__pycache__/
+*.pyc
+
+# CatBoost training outputs
+catboost_info/
+
+# ML outputs
+submission.csv
+submission_anchored.csv

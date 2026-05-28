@@ -1,0 +1,372 @@
+--- PAGE 1 ---
+
+10
+DAY
+: 04
+HRS
+: 22
+MIN
+: 33
+SEC
+Gridlock Hackathon 2.0
+LIVELIVE
+May 26, 2026, 10:00 PM IST (Asia/Kolkata) - Jun 07, 2026, 11:59 PM IST (Asia/Kolkata)
+     
+INSTRUCTIONS PROBLEMS SUBMISSIONS LEADERBOARD ANALYTICS JUDGE
+Max. score: 100
+ Problems / Traffic demand prediction
+Traffic demand prediction
+Cities worldwide are increasingly turning to AI-powered solutions to tackle the issue of traffic congestion.
+This problem disrupts the smooth flow of transportation and poses a significant barrier to economic
+growth. To address this challenge effectively, the first step is to understand travel demand and patterns
+within urban areas comprehensively. By harnessing the power of AI, cities, and regions aim to gather
+critical insights into transportation dynamics. This will enable them to implement data-driven strategies
+and solutions to alleviate traffic congestion and promote more efficient mobility. Ultimately, this
+endeavor will foster economic development and prosperity.
+Task
+Design a system that helps us provide valuable insights into passenger travel patterns, booking behavior,
+and trip cancellations, which can be used for various analyses and predict demand in the travel industry.
+Dataset description
+The dataset folder contains the following files: 
+train.csv: 77299 x  11
+test.csv: 41778 x 10
+sample_submission.csv: 5 x 2
+Variable description
+The columns provided in the dataset are as follows:
+Column name Description
+Index Represents the unique identification of datapoint
+geohash Represents geographic information regarding a place
+day Represents the day when the information is recorded
+timestamp  Represents the timestamp of the record inserted in the system ?
+5/28/26, 7:36 PM Traffic demand prediction - Gridlock Hackathon 2.0 | HackerEarth
+https://www.hackerearth.com/challenges/competitive/gridlock-hackathon-20/machine-learning/traffic-demand-prediction-12-b86d1caf/ 1/7
+--- PAGE 2 ---
+RoadType Represents the type of road in the nearby location
+NumberofLanesRepresents the number of roads/lanes present in the location
+LargeVehicles Represents whether large vehicles are permitted on the specific roads/lanes
+Landmarks  Represents whether there are any landmarks near the location
+Temperature Represents the temperature of the place
+Weather Represents the weather of the place 
+demand Represents the demand of the traffic at the timestamp
+Evaluation metric
+score = max(0,100*(metrics.r2_score(actual,predicted)))
+Result submission guidelines
+The index is "Index" and the target is the "demand" column. 
+The submission file must be submitted in .csv format only.
+The size of this submission file must be  41778 x 2.
+Ensure that your submission file contains the following:
+Correct index values as per the test file
+Correct names of columns as provided in the sample_submission.csv file
+Instructions
+1. Click Download dataset to download the dataset.
+2. Solve the problem in your local environment.
+3. Save the predictions in a .csv file.
+4. Click Upload File (under the Upload File section) to upload your prediction file (.csv).
+5. Click Upload File (under the Upload Source Code section) to upload your .ipynb file along with any
+presentation file.
+6. Add any instructions or comments in the Your Answer section.
+7. Click Submit.
+Download dataset
+Upload Prediction File
+Please upload the prediction file in the format as stated in the problem.
+Choose File No file chosen
+Submit & Evaluate
+Upload Source Files
+You need to submit a zip or tar archive consisting of a text file explaining your approach, details about
+feature engineering, tools you used and the relevant source files. ?
+5/28/26, 7:36 PM Traffic demand prediction - Gridlock Hackathon 2.0 | HackerEarth
+https://www.hackerearth.com/challenges/competitive/gridlock-hackathon-20/machine-learning/traffic-demand-prediction-12-b86d1caf/ 2/7
+--- PAGE 3 ---
+COMMENTS (27) SORT BY: 
+PostCancel
+Choose File No file chosen
+Upload
+Join Discussion...
+Yagyansh Dev Singha day ago
+ Reply
+Just wrapped up a traffic demand forecasting challenge — predicting normalized ride demand across
+locations and time slots using geohash, road, and weather data.
+The biggest unlock was geohash × time-slot target encoding — mapping each location's historical demand at
+every 15-minute window. This single interaction feature captured rush-hour patterns specific to each location
+far better than any raw feature could.
+Other key moves:
+Cyclical sin/cos encoding for time (so midnight doesn't look far from 11:45 PM)
+Approximate lat/lon decoded from geohash strings for continuous spatial signal
+Temperature imputed via group medians (geohash prefix + day) before global fallback
+LightGBM with 2000 trees, leaf-wise growth, and light L1/L2 regularization
+Final R² of 0.9994 on the training set.
+The lesson: in spatio-temporal problems, interaction encodings between location and time almost always
+matter more than engineering either dimension alone.
+ 10 votes
+Shraddha Rajendra Jadhav20 hours ago
+ Reply
+I want to join ur team.I have technical expertise
+in AIML, Fullstack
+Development. I was
+Shortlisted, Selected in
+Nationals for Amazon,
+Google, SIH, etc
+Hackathons. My Mail id-
+sjn202358@gmail.com
+ 0 votes
+Ayush Ranjan20 hours ago
+ Reply
+We are looking for a teamate, we are experienced in competitions like this, having won two bronze medals at
+kaggle challenges. If anyone is up please reply to this comment !
+ 2 votes
+Aditya Chaudhary19 hours ago
+ Reply
+theaditya1985@gmail.com
+ 0 votes
+Lokesh Edited3 hours ago
+ Reply
+quan655737@gmail.com , deeply knows about kaggle playground competitions(iykyk)
+ 0 votes
+Shreyash Pore a day ago
+Relevance
+?
+5/28/26, 7:36 PM Traffic demand prediction - Gridlock Hackathon 2.0 | HackerEarth
+https://www.hackerearth.com/challenges/competitive/gridlock-hackathon-20/machine-learning/traffic-demand-prediction-12-b86d1caf/ 3/7
+--- PAGE 4 ---
+ Reply
+Building AI-driven traffic demand prediction to transform urban mobility with smarter, data-backed insights.
+Our solution analyzes travel patterns, road conditions, weather, and peak-hour trends to predict congestion
+accurately.
+Focused on reducing traffic chaos, improving city transportation efficiency, and enabling smarter future-ready
+infrastructure
+ 0 votes
+Shraddha Rajendra Jadhav20 hours ago
+ Reply
+would like to join ur team.I have technical expertise
+in AIML, Fullstack
+Development. I was
+Shortlisted, Selected in
+Nationals for Amazon,
+Google, SIH, etc
+Hackathons. Mail id-
+sjn202358@gmail.com
+ 0 votes
+Shib Chandan Mistrya day ago
+ Reply
+Approach Summary:
+1. Preprocessing: Merged datasets to ensure aligned categorical transformations between train and test
+distributions.
+2. Feature Engineering: Extracted structural information from geohash coordinates by slicing text into
+hierarchical prefixes to capture regional dynamics. Transformed timestamps using sine and cosine functions
+to model daily cyclical peak hours.
+3. Modeling: Deployed a 5-fold cross-validation routine coupled with a gradient boosting architecture to
+minimize validation error and prevent overfitting.
+4. Output: Generated predictions aligned with target evaluation rules.
+ 0 votes
+Shraddha Rajendra Jadhav20 hours ago
+ Reply
+would like to join ur team.I have technical expertise
+in AIML, Fullstack
+Development. I was
+Shortlisted, Selected in
+Nationals for Amazon,
+Google, SIH, etc
+Hackathons. Mail id-
+sjn202358@gmail.com
+ 0 votes
+Monalisha Patra a day ago
+ Reply
+- Developed a leakage-free traffic demand prediction pipeline using LightGBM and advanced feature
+engineering techniques.
+- Engineered temporal, spatial, weather, and infrastructure-based features to effectively model traffic
+behavior patterns.
+- Implemented hierarchical geohash-based target encoding with fallback mechanisms to handle sparse and
+unseen regions.
+- Identified and resolved a critical target leakage issue that was artificially inflating validation performance.
+- Applied fold-wise target encoding to ensure reliable cross-validation and robust model generalization.
+- Utilized Bayesian smoothing and ensemble modeling to improve prediction stability and reduce overfitting.
+- Achieved a stable and trustworthy out-of-fold score of approximately 93.32 through leakage-free evaluation.
+ 1 vote
+Shraddha Rajendra Jadhav20 hours ago
+I would like to join ur team.I have technical expertise
+in AIML, Fullstack
+Development. I was
+Shortlisted, Selected in
+?
+5/28/26, 7:36 PM Traffic demand prediction - Gridlock Hackathon 2.0 | HackerEarth
+https://www.hackerearth.com/challenges/competitive/gridlock-hackathon-20/machine-learning/traffic-demand-prediction-12-b86d1caf/ 4/7
+--- PAGE 5 ---
+ Reply
+Nationals for Amazon,
+Google, SIH, etc
+Hackathons. Mail id-
+sjn202358@gmail.com
+ 0 votes
+Chetan Jaina day ago
+ Reply
+LightGBM with day-48 demand lookup as the golden feature. Key insight: all test timestamps (Day 49) exist in
+Day 48 training data, so demand_d48 (same geohash + timestamp from Day 48) was the strongest predictor.
+Added geohash-decoded lat/lon, per-location & per-timestamp aggregate stats, cyclical time encoding, and
+weather/road features. 5-fold CV score: 98.31 R²×100
+ 0 votes
+Shraddha Rajendra Jadhav20 hours ago
+ Reply
+would like to join ur team.I have technical expertise
+in AIML, Fullstack
+Development. I was
+Shortlisted, Selected in
+Nationals for Amazon,
+Google, SIH, etc
+Hackathons. Mail id-
+sjn202358@gmail.com
+ 0 votes
+Magraj Jakhara day ago
+ Reply
+Two-model ensemble (LightGBM + XGBoost) with spatial-temporal feature engineering and Day 48 lag
+features. Local validation R² = 94.13. Final prediction is a weighted blend of a global model (20%) and a lag-
+aware model (80%).
+ 0 votes
+Shraddha Rajendra Jadhav20 hours ago
+ Reply
+would like to join ur team.I have technical expertise
+in AIML, Fullstack
+Development. I was
+Shortlisted, Selected in
+Nationals for Amazon,
+Google, SIH, etc
+Hackathons. Mail id-
+sjn202358@gmail.com
+ 0 votes
+Abneesh Singha day ago
+Solution Overview: Spatial-Temporal Forecasting Ensemble
+Architecture:
+We engineered a 63-feature pipeline focused on hyper-local, time-series traffic patterns.
+Key features include label-encoded geohashes (allowing gradient boosting trees to learn location-specific
+baseline signatures) and temporal interactions (e.g., RoadType × Hour).
+We extracted extensive baseline statistics for each (Geohash + Hour) combination, as our variance
+decomposition proved this explains 94.8% of historical traffic variance.
+Modeling Strategy:
+Base Models: LightGBM, CatBoost, and XGBoost regression models.
+Hyperparameter Tuning: Optuna was used to run hundreds of optimization trials to mathematically
+determine optimal depth, learning rate, and regularization settings via cross-validation.
+Final Ensemble: Predictions were generated using a weighted blend of the base models, with weights
+optimized via a secondary Optuna study to minimize RMSE and maximize the R2 score.
+Generalization: The final model was trained on the entire dataset to maximize robustness against distribution
+shifts in the daytime test predictions.
+?
+5/28/26, 7:36 PM Traffic demand prediction - Gridlock Hackathon 2.0 | HackerEarth
+https://www.hackerearth.com/challenges/competitive/gridlock-hackathon-20/machine-learning/traffic-demand-prediction-12-b86d1caf/ 5/7
+--- PAGE 6 ---
+ Reply 0 votes
+Shraddha Rajendra Jadhav20 hours ago
+ Reply
+would like to join ur team.I have technical expertise
+in AIML, Fullstack
+Development. I was
+Shortlisted, Selected in
+Nationals for Amazon,
+Google, SIH, etc
+Hackathons. Mail id-
+sjn202358@gmail.com
+ 0 votes
+23ucc55520 hours ago
+ Reply
+hello
+ 0 votes
+Sakthi J 20 hours ago
+ Reply
+Built a traffic demand prediction model using XGBoost with feature engineering on timestamp and
+categorical encoding. Used preprocessing, label encoding, and regression modeling to predict traffic demand
+efficiently.
+ 0 votes
+Shraddha Rajendra Jadhav20 hours ago
+ Reply
+would like to join ur team.I have technical expertise
+in AIML, Fullstack
+Development. I was
+Shortlisted, Selected in
+Nationals for Amazon,
+Google, SIH, etc
+Hackathons. Mail id-
+sjn202358@gmail.com
+ 0 votes
+SINGAVARAM HEERALAL SINGH13 hours ago
+ Reply
+Just wrapped up a Traffic Demand Prediction project using Machine Learning ??
+✔  Performed data preprocessing and feature engineering
+✔  Extracted time-based insights from timestamp data
+✔  Handled categorical and numerical features efficiently
+✔  Built a Random Forest Regression model for prediction
+✔  Generated prediction results in required CSV format
+Tech Stack Used:
+Python | Pandas | Scikit-learn | Machine Learning
+This project helped me understand how AI can be used for smart traffic management and urban mobility
+analysis. ? ✨
+#MachineLearning #Python #DataScience #AI #TrafficPrediction #MCA #ScikitLearn #Analytics
+ 0 votes
+Kishan Kumar7 hours ago
+ Reply
+Very Good Problem Statement
+ 0 votes
+utkarshv0877 hours ago
+ Reply
+Built a traffic demand prediction model using feature engineering on timestamp and categorical encoding.
+Used preprocessing, label encoding, and regression modeling to predict traffic demand efficiently
+ 0 votes
+YASASRI PRASANNA Y 7 hours ago ?
+5/28/26, 7:36 PM Traffic demand prediction - Gridlock Hackathon 2.0 | HackerEarth
+https://www.hackerearth.com/challenges/competitive/gridlock-hackathon-20/machine-learning/traffic-demand-prediction-12-b86d1caf/ 6/7
+--- PAGE 7 ---
+ Reply
+Completed the Traffic Demand Prediction challenge in Flipkart Gridlock Hackathon 2.0 ?
+Worked on preprocessing, feature encoding, and machine learning model training using Python and Random
+Forest.
+Great learning experience in real-world ML problem solving ?
+ 0 votes
+Ritesh Kumar Singh7 hours ago
+ Reply
+Implemented an advanced ensemble-based traffic demand prediction pipeline using LightGBM, XGBoost, and
+CatBoost with Optuna hyperparameter tuning, target encoding, cyclic temporal feature engineering, and
+pseudo labeling for robust generalization and improved R² performance.
+ 0 votes
+Loksai Palyam5 hours ago
+ Reply
+Building a pure-Rust urban mobility AI engine that bypasses heavy Python environments.
+Decodes alphanumeric geographic geohashes into real-world coordinate vectors (Lat/Lon).
+Trains a high-fidelity 300-tree Random Forest to predict traffic demand loops.
+ 0 votes
+Riya Gupta4 minutes ago
+ Reply
+are we going to have another problem statement coming up?
+ 0 votes
++1-650-461-4192
+For sales enquiry
+contact@hackerearth.com
+For support
+support@hackerearth.com
+Hackathons
+Challenges
+Jobs
+Practice
+Campus
+Ambassadors
+For Developers
+Hackathons
+Assessments
+FaceCode
+Learning and
+Development
+For Businesses
+Practice
+Interview Prep
+Codemonk
+Engineering
+Blog
+Knowledge
+About us
+Careers
+Press
+Support
+Contact
+Privacy
+Policy
+Company
+© 2026 HackerEarth All rights reserved | Terms of Service | Privacy Policy
+?
+5/28/26, 7:36 PM Traffic demand prediction - Gridlock Hackathon 2.0 | HackerEarth
+https://www.hackerearth.com/challenges/competitive/gridlock-hackathon-20/machine-learning/traffic-demand-prediction-12-b86d1caf/ 7/7
